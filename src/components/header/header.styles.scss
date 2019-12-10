@@ -1,0 +1,49 @@
+.header {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+
+  @media (max-width: 767px){
+  .header{
+    flex-flow: row wrap;
+    justify-content: space-around;
+
+  }
+}
+  .logo-container {
+    height: 100%;
+    width: 70px;
+    padding: 25px;
+  }
+
+  .options {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+       
+}
+    .option {
+      padding: 10px 15px;
+      cursor:pointer;
+
+  
+    }
+  }
+
+
+ @media (max-width: 767px){
+  .header{
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+
+     .options {
+    width: 80%;
+  }
+  }
+ 
+}
