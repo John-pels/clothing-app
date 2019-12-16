@@ -1,10 +1,6 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
-const OptionsContainerStyles = css`
-  padding: 10px 15px;
-  cursor: pointer;
-`;
 const HeaderContainerResponsive = css`
   @media (max-width: 767px) {
     flex-flow: row wrap;
@@ -18,7 +14,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
-   ${HeaderContainerResponsive}
+  ${HeaderContainerResponsive}
 `;
 
 export const LogoContainer = styled(Link)`
@@ -36,9 +32,6 @@ export const OptionsContainer = styled.div`
 `;
 
 export const OptionLink = styled(Link)`
-  ${OptionsContainerStyles}
-`;
-
-export const OptionDiv = styled(Link)`
-  ${OptionsContainerStyles}
+  padding: 10px 15px;
+  cursor: pointer;
 `;
