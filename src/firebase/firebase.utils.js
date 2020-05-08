@@ -10,7 +10,7 @@ const config = {
   storageBucket: "clothing-db-e4f4d.appspot.com",
   messagingSenderId: "974418974282",
   appId: "1:974418974282:web:052161d74dbf8303fc78b3",
-  measurementId: "G-H4FRSC6J8T"
+  measurementId: "G-H4FRSC6J8T",
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -28,7 +28,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.log("error creating user", error.message);
@@ -47,7 +47,7 @@ export const addCollectionAndDocuments = async (
   const collectionRef = firestore.collection(collectionKey);
 
   const batch = firestore.batch();
-  objectsToAdd.forEach(obj => {
+  objectsToAdd.forEach((obj) => {
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, obj);
   });
@@ -55,8 +55,8 @@ export const addCollectionAndDocuments = async (
   return await batch.commit();
 };
 
-export const convertCollectionsSnapshotToMap = collectionsSnapshot => {
-  const transformedCollection = collectionsSnapshot.docs.map(doc => {
+export const convertCollectionsSnapshotToMap = (collectionsSnapshot) => {
+  const transformedCollection = collectionsSnapshot.docs.map((doc) => {
     const data = doc.data();
     const { title, items } = data;
 
@@ -64,7 +64,7 @@ export const convertCollectionsSnapshotToMap = collectionsSnapshot => {
       routeName: encodeURI(title.toLowerCase()),
       id: doc.id,
       title,
-      items
+      items,
     };
   });
 
@@ -72,6 +72,15 @@ export const convertCollectionsSnapshotToMap = collectionsSnapshot => {
     accumulator[collection.title.toLowerCase()] = collection;
     return accumulator;
   }, {});
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
 };
 
 export const auth = firebase.auth();
