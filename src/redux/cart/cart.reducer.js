@@ -3,32 +3,38 @@ import { addItemToCart, removeItemFromCart } from "./cart.utils";
 
 const INITIAL_STATE = {
   hidden: true,
-  cartItems: []
+  cartItems: [],
 };
 const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CartActionTYpes.TOGGLE_CART_HIDDEN:
       return {
         ...state,
-        hidden: !state.hidden
+        hidden: !state.hidden,
       };
     case CartActionTYpes.ADD_ITEM:
       return {
         ...state,
-        cartItems: addItemToCart(state.cartItems, action.payload)
+        cartItems: addItemToCart(state.cartItems, action.payload),
       };
-      case CartActionTYpes.REMOVE_ITEM:
-        return {
-          ...state,
-          cartItems: removeItemFromCart(state.cartItems, action.payload)
-        }
+    case CartActionTYpes.REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: removeItemFromCart(state.cartItems, action.payload),
+      };
 
     case CartActionTYpes.CLEAR_ITEM_FROM_CART:
       return {
         ...state,
         cartItems: state.cartItems.filter(
-          cartItem => cartItem.id !== action.payload.id
-        )
+          (cartItem) => cartItem.id !== action.payload.id
+        ),
+      };
+
+    case CartActionTYpes.CLEAR_CART:
+      return {
+        ...state,
+        cartItems: [],
       };
     default:
       return state;
